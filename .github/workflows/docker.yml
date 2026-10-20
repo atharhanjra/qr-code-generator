@@ -1,0 +1,19 @@
+name: Build and Test Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Build the Docker image
+        run: docker build -t qr-code-generator-app .
+
+      - name: Test the Docker image by running it
+        run: docker run --rm qr-code-generator-app --url http://www.njit.edu
